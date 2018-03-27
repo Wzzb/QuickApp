@@ -1,0 +1,36 @@
+<template>
+    <!-- 修改class -->
+    <text class="normal-text {{className}}" onclick="changeClassName">点击我修改文字颜色</text>
+    <!-- 修改内联style -->
+    <!-- <text style="color: {{textColor}}" onclick="changeInlineStyle">点击我修改文字颜色</text> -->
+</template>
+
+<style>
+    .normal-text {
+        font-weight: bold;
+    }
+
+    .text-blue {
+        color: #0faeff;
+    }
+
+    .text-red {
+        color: #f76160;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: '动态修改样式' })
+        },
+        data: {
+            className: 'text-blue',
+            textColor: '#0faeff'
+        },
+        changeClassName() { this.className = 'text-red' },
+        changeInlineStyle() {
+            this.textColor = '#f76160'
+        }
+    }
+</script>

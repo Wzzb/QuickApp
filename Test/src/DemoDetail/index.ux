@@ -1,0 +1,75 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="demo-page">
+    <text class="title">{{text}}</text>
+  </div>
+</template>
+
+<style>
+  .demo-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      text: '欢迎打开详情页',
+      lcList:[]
+    },
+    /**
+     * 当用户点击菜单按钮时触发，调用app中定义的方法showMenu
+     * 注意：使用加载器测试'创建桌面快捷方式'功能时，请先在'系统设置'中打开'应用加载器'的'桌面快捷方式'权限
+     */
+    onMenuPress() {
+      this.$app.showMenu()
+      console.debug("show menu success.")
+    },
+    onInit(){
+      this.$page.setTitleBar({text:'生命周期页面'})
+      this.lcList.push('onInit')
+      console.debug("触发 onInit")
+      console.info('获取data的lcList属性：',this.lcList)
+    },
+    onReady(){
+      this.lcList.push('onReady')
+      console.debug("onReady")
+      console.info('执行：获取模板节点：${this.$rootElement()}')
+    },
+    onShow () {
+      this.lcList.push('onShow')
+      console.info('触发：onShow')
+      console.info('执行：获取页面显示状态属性：',this.$visible)  // true
+    },
+    onHide () {
+      this.lcList.push('onHide')
+      console.info('触发：onHide')
+      console.info('执行：获取页面显示状态属性：${this.$visible}')  // false
+    },
+    onDestroy () {
+      console.info('触发：onDestroy')
+      console.info('执行：页面要被销毁，销毁状态：${this.$valid}，应该做取消接口订阅监听的操作: geolocation.susubscribe()')    // true，即将销毁
+      setTimeout(function () {
+        console.info('执行：页面已被销毁，不会执行')                                        // 页面已销毁，不会执行
+      }.bind(this), 0)
+    },
+    onBackPress () {
+      console.info('触发：onBackPress')
+
+      // true：表示自己处理；否则默认返回上一页
+      // return true
+    },
+    onMenuPress () {
+      this.lcList.push('onMenuPress')
+
+      console.info('触发：onMenuPress')
+    }
+  }
+</script>

@@ -1,0 +1,61 @@
+<template>
+    <div class="tutorial-page">
+        <!-- 内联样式 -->
+        <text style="color: #0000FF;">内联样式</text>
+
+        <text id="title">ID选择器</text>
+        <text class="title">class选择器</text>
+        <text>tag选择器</text>
+    </div>
+</template>
+
+<style>
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    /* tag选择器 */
+
+    text {
+        color:#00ff00;
+    }
+
+    /* class 选择器(推荐） */
+
+    .title {
+        color: #00ff00;
+    }
+
+    /* id 选择器 */
+
+    #title {
+        color: #00A000;
+    }
+
+    /* 并列选择 */
+
+    .title,
+    #title {
+        font-weight: bold;
+    }
+
+    /* 后代选择器 */
+
+    .tutorial-page text {
+        font-size: 42px;
+    }
+
+    /* 直接后代选择器 */
+
+    .tutorial-page>text {
+        text-decoration:u;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: '设置样式' })
+        }
+    }
+</script>

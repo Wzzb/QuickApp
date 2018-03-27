@@ -1,0 +1,39 @@
+<template>
+    <div class="tutorial-page">
+        <!-- <text id="elNode1" item-flag="{{ argName + 1 }}" onclick="onClickHandler">组件节点1</text>
+        <text id="elNode2" item-flag="{{ argName + 2 }}" onclick="onClickHandler2('参数1', argName)">组件节点2</text> -->
+        <text id="elNode1" onclick="onClickHandler">组件节点1</text>
+        <text id="elNode2" onclick="onClickHandler2('参数1', argName)">组件节点2</text>
+    </div>
+</template>
+
+<style lang="less">
+    .tutorial-page {
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    export default {
+        data() {
+            return {
+                argName: '动态参数'
+            }
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: '绑定事件' })
+        },
+        onClickHandler(evt) {
+            // 事件类型，参数详情
+            console.info('触发事件：类型：${evt.type}, 详情： ${JSON.stringify(evt.detail)}');
+
+            if (evt.target) {
+                console.info('触发事件：节点：${evt.target.id}, ${evt.target.attr.itemFlag}')
+            }
+        },
+        onClickHandler2(arg1, arg2, evt) {
+            // 事件类型，事件参数，target
+            console.info('触发事件：类型：${evt.type}, 参数： ${arg1}, ${arg2}');
+        }
+    }
+</script>

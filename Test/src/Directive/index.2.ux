@@ -1,0 +1,61 @@
+<template>
+    <div class="tutorial-page">
+        <text onclick="toggleCityList">点击：控制是否显示城市</text>
+        <list>
+            <block for="city in cityList" if="{{showCityList === 1}}">
+                <list-item type="city">
+                    <text>城市：{{city.name}}</text>
+                    <block for="{{city.spots}}">
+                        <div show="{{city.showSpots}}">
+                            <text>景点：{{$item.name}}</text>
+                        </div>
+                    </block>
+
+                </list-item>
+            </block>
+        </list>
+    </div>
+
+</template>
+
+<style lang="less">
+    .tutorial-page {
+        flex-direction: column;
+    }
+
+    list,
+    list-item {
+        flex-direction: column;
+    }
+</style>
+
+<script>
+    export default {
+        onInit() {
+            this.$page.setTitleBar({ text: '组件block' })
+        },
+        data: {
+            'showCityList': 1,
+            'cityList': [
+                {
+                    'name': '北京',
+                    'showSpots': true,
+                    'spots': [
+                        { 'name': '天安门' },
+                        { 'name': '八达岭' }
+                    ]
+                },
+                {
+                    'name': '上海',
+                    'showSpots': false,
+                    'spots': [
+                        { 'name': '东方明珠' }
+                    ]
+                }
+            ]
+        },
+        toggleCityList() {
+            this.showCityList = this.showCityList === 1 ? 0 : 1
+        }
+    }
+</script>
